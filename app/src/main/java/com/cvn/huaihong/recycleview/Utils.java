@@ -13,13 +13,13 @@ public class Utils {
 
     /**
      * dpתpx
+     *
      * @param context
      * @param dp
      * @return
      */
-    public static int dp2px(Context context,float dp)
-    {
-        return (int ) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+    public static int dp2px(Context context, float dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 dp, context.getResources().getDisplayMetrics());
     }
 
@@ -29,12 +29,11 @@ public class Utils {
      * @param context
      * @return
      */
-    public static int getScreenWidth(Context context)
-    {
+    public static int getScreenWidth(Context context) {
         WindowManager wm = (WindowManager) context
-                .getSystemService(Context.WINDOW_SERVICE );
+                .getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics outMetrics = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics( outMetrics);
-        return outMetrics .widthPixels ;
+        wm.getDefaultDisplay().getMetrics(outMetrics);
+        return outMetrics.widthPixels;
     }
 }

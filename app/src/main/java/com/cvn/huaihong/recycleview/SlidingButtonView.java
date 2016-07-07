@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
 
-public class SlidingButtonView extends HorizontalScrollView   {
+public class SlidingButtonView extends HorizontalScrollView {
 
     private TextView mTextView_RightContent;
 
@@ -27,7 +27,7 @@ public class SlidingButtonView extends HorizontalScrollView   {
     }
 
     public SlidingButtonView(Context context, AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public SlidingButtonView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -40,7 +40,7 @@ public class SlidingButtonView extends HorizontalScrollView   {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        if(!once){
+        if (!once) {
             mTextView_RightContent = (TextView) findViewById(R.id.right_content);
             once = true;
         }
@@ -50,10 +50,10 @@ public class SlidingButtonView extends HorizontalScrollView   {
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
-        if(changed){
-            this.scrollTo(0,0);
+        if (changed) {
+            this.scrollTo(0, 0);
             //��ȡˮƽ���������Ի����ķ�Χ�����Ҳఴť�Ŀ��
-            mScrollWidth = mTextView_RightContent.getWidth()*2;
+            mScrollWidth = mTextView_RightContent.getWidth() * 2;
             Log.i("asd", "mScrollWidth:" + mScrollWidth);
         }
 
@@ -87,12 +87,12 @@ public class SlidingButtonView extends HorizontalScrollView   {
     /**
      * �����������϶������жϹرջ�򿪲˵�
      */
-    public void changeScrollx(){
-        if(getScrollX() >= (mScrollWidth/2)){
+    public void changeScrollx() {
+        if (getScrollX() >= (mScrollWidth / 2)) {
             this.smoothScrollTo(mScrollWidth, 0);
             isOpen = true;
             mIonSlidingButtonListener.onMenuIsOpen(this);
-        }else{
+        } else {
             this.smoothScrollTo(0, 0);
             isOpen = false;
         }
@@ -101,9 +101,8 @@ public class SlidingButtonView extends HorizontalScrollView   {
     /**
      * �򿪲˵�
      */
-    public void openMenu()
-    {
-        if (isOpen){
+    public void openMenu() {
+        if (isOpen) {
             return;
         }
         this.smoothScrollTo(mScrollWidth, 0);
@@ -114,9 +113,8 @@ public class SlidingButtonView extends HorizontalScrollView   {
     /**
      * �رղ˵�
      */
-    public void closeMenu()
-    {
-        if (!isOpen){
+    public void closeMenu() {
+        if (!isOpen) {
             return;
         }
         this.smoothScrollTo(0, 0);
@@ -124,14 +122,13 @@ public class SlidingButtonView extends HorizontalScrollView   {
     }
 
 
-
-
-    public void setSlidingButtonListener(IonSlidingButtonListener listener){
+    public void setSlidingButtonListener(IonSlidingButtonListener listener) {
         mIonSlidingButtonListener = listener;
     }
 
-    public interface IonSlidingButtonListener{
+    public interface IonSlidingButtonListener {
         void onMenuIsOpen(View view);
+
         void onDownOrMove(SlidingButtonView slidingButtonView);
     }
 

@@ -31,5 +31,5 @@ dependencies {
     compile 'com.android.support:design:23.2.1'
     compile 'com.android.support:support-v4:23.4.0'
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile(name:'SlidingMenuLibrary-debug', ext:'aar')
+    compile(name: 'SlidingMenuLibrary-debug', ext: 'aar')
 }
