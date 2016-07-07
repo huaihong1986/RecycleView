@@ -31,7 +31,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> implemen
         mIDeleteBtnClickListener = (IonSlidingViewClickListener) context;
 
         for (int i = 0; i < 10; i++) {
-            mDatas.add(i+"");
+            mDatas.add(i + "");
         }
     }
 
@@ -53,6 +53,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> implemen
                 //�ж��Ƿ���ɾ���˵���
                 if (menuIsOpen()) {
                     closeMenu();//�رղ˵�
+                    int n = holder.getLayoutPosition();
+                    mIDeleteBtnClickListener.onItemClick(v, n);
                 } else {
                     int n = holder.getLayoutPosition();
                     mIDeleteBtnClickListener.onItemClick(v, n);
@@ -79,40 +81,21 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> implemen
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup arg0, int arg1) {
 
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_item, arg0,false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_item, arg0, false);
         MyViewHolder holder = new MyViewHolder(view);
 
         return holder;
     }
 
-
-
-    class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView btn_Delete;
-        public TextView textView;
-        public TextView btn_Modify;
-        public ViewGroup layout_content;
-        public MyViewHolder(View itemView) {
-            super(itemView);
-            btn_Delete = (TextView) itemView.findViewById(R.id.tv_delete);
-            btn_Modify = (TextView) itemView.findViewById(R.id.tv_modify);
-            textView = (TextView) itemView.findViewById(R.id.text);
-            layout_content = (ViewGroup) itemView.findViewById(R.id.layout_content);
-
-            ((SlidingButtonView) itemView).setSlidingButtonListener(Adapter.this);
-        }
-    }
-
-    public void modifyData(int position,int num) {
-        mDatas.set(position,""+num);
+    public void modifyData(int position, int num) {
+        mDatas.set(position, "" + num);
         notifyItemChanged(position);
     }
 
-    public void removeData(int position){
+    public void removeData(int position) {
         mDatas.remove(position);
         notifyItemRemoved(position);
     }
-
 
     /**
      * ɾ���˵�����Ϣ����
@@ -124,12 +107,13 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> implemen
 
     /**
      * �������ߵ����Item����
+     *
      * @param slidingButtonView
      */
     @Override
     public void onDownOrMove(SlidingButtonView slidingButtonView) {
-        if(menuIsOpen()){
-            if(mMenu != slidingButtonView){
+        if (menuIsOpen()) {
+            if (mMenu != slidingButtonView) {
                 closeMenu();
             }
         }
@@ -143,23 +127,41 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> implemen
         mMenu = null;
 
     }
+
     /**
      * �ж��Ƿ��в˵���
      */
     public Boolean menuIsOpen() {
-        if(mMenu != null){
+        if (mMenu != null) {
             return true;
         }
-        Log.i("asd","mMenuΪnull");
+        Log.i("asd", "mMenuΪnull");
         return false;
     }
 
-
-
     public interface IonSlidingViewClickListener {
         void onItemClick(View view, int position);
+
         void onDeleteBtnClick(View view, int position);
+
         void onModifyBtnClick(View view, int position);
+    }
+
+    class MyViewHolder extends RecyclerView.ViewHolder {
+        public TextView btn_Delete;
+        public TextView textView;
+        public TextView btn_Modify;
+        public ViewGroup layout_content;
+
+        public MyViewHolder(View itemView) {
+            super(itemView);
+            btn_Delete = (TextView) itemView.findViewById(R.id.tv_delete);
+            btn_Modify = (TextView) itemView.findViewById(R.id.tv_modify);
+            textView = (TextView) itemView.findViewById(R.id.text);
+            layout_content = (ViewGroup) itemView.findViewById(R.id.layout_content);
+
+            ((SlidingButtonView) itemView).setSlidingButtonListener(Adapter.this);
+        }
     }
 }
 
